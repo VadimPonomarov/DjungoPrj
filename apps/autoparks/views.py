@@ -5,17 +5,17 @@ from rest_framework.generics import (GenericAPIView, ListCreateAPIView,
 from rest_framework.response import Response
 
 from apps.autoparks.models import Autopark
-from apps.autoparks.serializers import Autopark_serializer
-from apps.cars.serializers import Car_serializer
+from apps.autoparks.serializers import AutoparkSerializer
+from apps.cars.serializers import CarSerializer
 
 
 class AutoparkListCreateView(ListCreateAPIView):
-    serializer_class = Autopark_serializer
+    serializer_class = AutoparkSerializer
     queryset = Autopark.objects.prefetch_related('cars')
 
 
 class AutoparkRetrieveUpdateDestroyView(RetrieveUpdateDestroyAPIView):
-    serializer_class = Autopark_serializer
+    serializer_class = AutoparkSerializer
     queryset = Autopark.objects.prefetch_related('cars')
 
 
@@ -24,7 +24,7 @@ class AutoparkCarCreateView(GenericAPIView):
 
     def post(self, *args, **kwargs):
         pk = kwargs.get('pk')
-        serializer = Car_serializer(data=self.request.data)
+        serializer = CarSerializer(data=self.request.data)
         serializer.is_valid(raise_exception=True)
         exists = Autopark.objects.filter(pk=pk).exists()
 

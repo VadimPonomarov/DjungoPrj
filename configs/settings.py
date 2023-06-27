@@ -31,6 +31,8 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
+AUTH_USER_MODEL = 'users.User'
+
 INSTALLED_APPS = [
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -39,7 +41,8 @@ INSTALLED_APPS = [
     # my_apps
     'apps.cars',
     'apps.autoparks',
-    'core'
+    'apps.users',
+    'core',
 ]
 
 MIDDLEWARE = [
